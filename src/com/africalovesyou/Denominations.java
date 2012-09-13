@@ -28,12 +28,20 @@ public class Denominations {
 
     private Denominations(Context context) {
         mCurrencies = new Vector<Currency>(Shilling + 1);
-        mCurrencies.add(
-                new Currency("United Arab Emirates Dirham", "Dh", context.getResources().getDrawable(R.drawable.ae)));
-        mCurrencies.add(
-                new Currency("Canadian Dollar", "$", context.getResources().getDrawable(R.drawable.ca)));
-        mCurrencies.add(
-                new Currency("Kenyan Shilling", "KSh", context.getResources().getDrawable(R.drawable.ke)));
+
+        Currency aed = new Currency("United Arab Emirates Dirham", "Dh", context.getResources().getDrawable(R.drawable.ae));
+        aed.setCoinDenominations(new Integer[] { 1 });
+        aed.setPaperDenominations(new Integer[] { 5, 10, 20, 50, 100, 1000 });
+        Currency cad = new Currency("Canadian Dollar", "$", context.getResources().getDrawable(R.drawable.ca));
+        cad.setCoinDenominations(new Integer[] { 1, 2 });
+        cad.setPaperDenominations(new Integer[] { 5, 10, 20, 50, 100, 1000 });
+        Currency ksh = new Currency("Kenyan Shilling", "KSh", context.getResources().getDrawable(R.drawable.ke));
+        ksh.setCoinDenominations(new Integer[] { 1, 5, 10 , 20, 40 });
+        ksh.setPaperDenominations(new Integer[] { 10, 20, 50, 100, 200, 500, 1000 });
+
+        mCurrencies.add(aed);
+        mCurrencies.add(cad);
+        mCurrencies.add(ksh);
 
         // TODO: Load from external conversion rate server instead of hard-coding.
         mCurrencies.get(Dirham).put(mCurrencies.get(Dollar), 0.2659);

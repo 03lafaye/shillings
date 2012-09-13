@@ -25,7 +25,8 @@ public class ConversionActivity extends Activity {
         Denominations denominations = Denominations.getInstance(this);
         ListView denominationsList = (ListView) findViewById(R.id.denominations);
         ArrayAdapter<Integer> mDenominationsAdapter = new ConversionArrayAdapter(
-                this, R.layout.row, denominations.getDenominations());
+                this, R.layout.row, denominations.getCurrentCurrency().getDenominations());
+        denominationsList.setAdapter(mDenominationsAdapter);
 
         ImageView flag1 = (ImageView) findViewById(R.id.flag1);
         flag1.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +61,5 @@ public class ConversionActivity extends Activity {
                 loadDenominations();
             }
         });
-        denominationsList.setAdapter(mDenominationsAdapter);
     }
 }
