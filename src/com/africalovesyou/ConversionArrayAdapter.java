@@ -20,11 +20,6 @@ public class ConversionArrayAdapter extends ArrayAdapter<Integer> {
         mContext = context;
     }
 
-
-    public void setDenominations(Denominations denominations) {
-       mDenominations = denominations;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {

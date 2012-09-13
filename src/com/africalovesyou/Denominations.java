@@ -7,7 +7,6 @@ import java.util.Vector;
 public class Denominations {
     private Currency mCurrentCurrency;
     private Currency mConversionCurrency;
-    private Context mContext;
 
     public static final int Dirham = 0;
     public static final int Dollar = 1;
@@ -25,14 +24,13 @@ public class Denominations {
     private static Denominations INSTANCE;
 
     private Denominations(Context context) {
-        mContext = context;
         mCurrencies = new Vector<Currency>(Shilling + 1);
         mCurrencies.add(
-                new Currency("United Arab Emirates Dirham", "Dh", mContext.getResources().getDrawable(R.drawable.ae)));
+                new Currency("United Arab Emirates Dirham", "Dh", context.getResources().getDrawable(R.drawable.ae)));
         mCurrencies.add(
-                new Currency("Canadian Dollar", "$", mContext.getResources().getDrawable(R.drawable.ca)));
+                new Currency("Canadian Dollar", "$", context.getResources().getDrawable(R.drawable.ca)));
         mCurrencies.add(
-                new Currency("Kenyan Shilling", "KSh", mContext.getResources().getDrawable(R.drawable.ke)));
+                new Currency("Kenyan Shilling", "KSh", context.getResources().getDrawable(R.drawable.ke)));
 
         // TODO: Load from external conversion rate server instead of hard-coding.
         mCurrencies.get(Dirham).put(mCurrencies.get(Dollar), 0.2659);
@@ -58,16 +56,20 @@ public class Denominations {
         return mCurrentCurrency;
     }
 
-    public void setCurrentCurrency(int index) {
-        mCurrentCurrency = mCurrencies.get(index);
+    public void setCurrentCurrency(Currency currency) {
+        mCurrentCurrency = currency;
     }
 
     public Currency getConversionCurrency() {
         return mConversionCurrency;
     }
 
-    public void setConversionCurrency(int index) {
-        mConversionCurrency = mCurrencies.get(index);
+    public void setConversionCurrency(Currency currency) {
+        mConversionCurrency = currency;
+    }
+
+    public Vector<Currency> getCurrencies() {
+        return mCurrencies;
     }
 
     public Integer[] getDenominations() {

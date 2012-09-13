@@ -19,7 +19,7 @@ public class Currency {
 
     public double convert(Currency currency, double amount) {
         if (!mConversionMap.containsKey(currency))
-            return -1;
+            return 1;
 
         double rate = mConversionMap.get(currency);
         return amount * rate;
