@@ -1,0 +1,80 @@
+package com.africalovesyou;
+
+import android.content.Context;
+
+import java.util.Vector;
+
+public class Denominations {
+    private Currency mCurrentCurrency;
+    private Currency mConversionCurrency;
+    private Context mContext;
+
+    public static final int Dirham = 0;
+    public static final int Dollar = 1;
+    public static final int Shilling = 2;
+
+    private Vector<Currency> mCurrencies;
+
+    private static final Integer[] mDenominations = {
+            1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 1200, 1500, 2000, 2100, 2500, 3000 };
+
+    private static final Integer[] mColours = {
+            0xffffffff, 0xffe2bf6e, 0xff837a71, 0xffc8564c, 0xff70c7da, 0xffe46c30, 0xff65a970, 0xfffad256,
+            0xffe562e0, 0xff7462e5, 0xff62e5b5, 0xffe56262, 0xffff2e4c, 0xff79fd9b, 0xff4d31f9, 0xffa98653 };
+
+    private static Denominations INSTANCE;
+
+    private Denominations(Context context) {
+        mContext = context;
+        mCurrencies = new Vector<Currency>(Shilling + 1);
+        mCurrencies.add(
+                new Currency("United Arab Emirates Dirham", "Dh", mContext.getResources().getDrawable(R.drawable.ae)));
+        mCurrencies.add(
+                new Currency("Canadian Dollar", "$", mContext.getResources().getDrawable(R.drawable.ca)));
+        mCurrencies.add(
+                new Currency("Kenyan Shilling", "KSh", mContext.getResources().getDrawable(R.drawable.ke)));
+
+        // TODO: Load from external conversion rate server instead of hard-coding.
+        mCurrencies.get(Dirham).put(mCurrencies.get(Dollar), 0.2659);
+        mCurrencies.get(Dirham).put(mCurrencies.get(Shilling), 23.0336);
+
+        mCurrencies.get(Dollar).put(mCurrencies.get(Dirham), 3.7605);
+        mCurrencies.get(Dollar).put(mCurrencies.get(Shilling), 86.6359);
+
+        mCurrencies.get(Shilling).put(mCurrencies.get(Dirham), 0.0116);
+        mCurrencies.get(Shilling).put(mCurrencies.get(Dollar), 0.0434);
+
+        mCurrentCurrency = mCurrencies.get(Dollar);
+        mConversionCurrency = mCurrencies.get(Dirham);
+    }
+
+    public static Denominations getInstance(Context context) {
+        if (INSTANCE == null)
+            INSTANCE = new Denominations(context);
+        return INSTANCE;
+    }
+
+    public Currency getCurrentCurrency() {
+        return mCurrentCurrency;
+    }
+
+    public void setCurrentCurrency(int index) {
+        mCurrentCurrency = mCurrencies.get(index);
+    }
+
+    public Currency getConversionCurrency() {
+        return mConversionCurrency;
+    }
+
+    public void setConversionCurrency(int index) {
+        mConversionCurrency = mCurrencies.get(index);
+    }
+
+    public Integer[] getDenominations() {
+        return mDenominations;
+    }
+
+    public Integer[] getColours() {
+        return mColours;
+    }
+}
