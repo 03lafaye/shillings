@@ -42,8 +42,7 @@ public class ConversionArrayAdapter extends ArrayAdapter<Integer> {
         symbol2.setText(conversion.getSymbol());
 
         Integer[] colours = mDenominations.getColours();
-
-        int colour = position < colours.length ? colours[position] : 0xFFFFFFFF;
+        int colour = colours[position % colours.length];
         convertView.setBackgroundColor(colour);
 
         return convertView;
