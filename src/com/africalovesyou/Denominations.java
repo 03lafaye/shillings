@@ -37,7 +37,7 @@ public class Denominations {
         cad.setPaperDenominations(new Integer[] { 5, 10, 20, 50, 100, 1000 });
         Currency ksh = new Currency("Kenyan Shilling", "KSh", context.getResources().getDrawable(R.drawable.ke));
         ksh.setCoinDenominations(new Integer[] { 1, 5, 10 , 20, 40 });
-        ksh.setPaperDenominations(new Integer[] { 10, 20, 50, 100, 200, 500, 1000 });
+        ksh.setPaperDenominations(new Integer[] { 50, 100, 200, 500, 1000 });
 
         mCurrencies.add(aed);
         mCurrencies.add(cad);

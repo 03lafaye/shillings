@@ -32,10 +32,11 @@ public class ConversionArrayAdapter extends ArrayAdapter<Integer> {
 
         int amount = getItem(position);
 
-        if (current.isCoin(amount)) {
-            View currentCurrency = convertView.findViewById(R.id.currentCurrency);
+        View currentCurrency = convertView.findViewById(R.id.currentCurrency);
+        if (current.isCoin(amount))
             currentCurrency.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.border_circle));
-        }
+        else
+            currentCurrency.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.border));
 
         TextView amount1 = (TextView)convertView.findViewById(R.id.amount1);
         amount1.setText(mDecimalFormat.format(amount));
