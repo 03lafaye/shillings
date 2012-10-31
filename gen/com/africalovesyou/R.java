@@ -18,6 +18,7 @@ public final class R {
         public static final int convert=0x7f020004;
         public static final int ic_launcher=0x7f020005;
         public static final int ke=0x7f020006;
+        public static final int usa=0x7f020007;
     }
     public static final class id {
         public static final int amount1=0x7f050009;
